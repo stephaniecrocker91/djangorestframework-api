@@ -1,17 +1,11 @@
 
 
 DEBUGS
-- Trusted origins when using Django 4
-# Trusted origins when using Django4!
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000'
-],
-ALLOWED_HOSTS = [
-    'localhost',
-],
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8000',
-]
+Initially intalled django 4.1
+pip3 install 'django<4'
+
+Django 3.2 is the LTS (Long Term Support) version of Django and is therefore preferable to use over the newest Django 4
+
 
 
 Credits:
