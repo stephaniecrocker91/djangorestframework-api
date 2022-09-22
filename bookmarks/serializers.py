@@ -11,7 +11,7 @@ class BookmarkSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
-        model = Bookmark()
+        model = Bookmark
         fields = ['id', 'created_at', 'owner', 'post']
 
     def create(self, validated_data):
