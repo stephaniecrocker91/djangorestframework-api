@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from posts.models import Post
 from likes.models import Like
+from bookmarks.models import Bookmark
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -9,6 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     like_id = serializers.SerializerMethodField()
+    bookmark_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
     
@@ -41,11 +43,21 @@ class PostSerializer(serializers.ModelSerializer):
             return liked.id if liked else None
         return None
 
+    def get_bookmark_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            bookmarked = Bookmark.objects.filter(
+                owner=user, post=obj
+            ).first()
+            return bookmarked.id if bookmarked else None
+        return None    
+
     class Meta:
         model = Post
         fields = [
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'title', 'content', 'image', 'image_filter',
-            'like_id', 'likes_count', 'comments_count',
+            'like_id', 'bookmark_id', 'likes_count',
+            'comments_count',
         ]
