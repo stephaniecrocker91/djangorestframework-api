@@ -59,7 +59,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
-    'instantes-df-api.herokuapp.com',
+    'instantes-drf-api.herokuapp.com',
     'localhost',
 ]
 
