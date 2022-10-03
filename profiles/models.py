@@ -11,7 +11,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='../avatar_profile_mkm0cf'
+        upload_to='images/', default='../avatar-profile_mkm0cf'
     )
 
     class Meta:
