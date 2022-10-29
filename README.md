@@ -34,16 +34,47 @@ Prior to commencing to write my code out, I planned out the ERD.
 
 <img src="src/assets/erd-map.png" width="1000px">
 
-## Manual Testing:
+The User Model: Django default User Model. We will use user (PK) owner which will have a OneToOne relationship and on_delete=models.CASCADE.
+
+
+User model --> Id(BigAuto), username(char), password (char)
+
+Post model --> ID(BigAuto), Owner(FK), Title(char), content(text), image(imgage with default image in cloudinary)
+
+Likes Model --> Id (BigAuto), Owner(FK), post(FK), created_at(DateTime)
+
+Bookmarks Model --> Id (BigAuto), Owner(FK), post(FK), created_at(DateTime)
+
+Comments Model --> id(BigAuto), Owner(FK), post(FK), created_at(DateTime), updated_at(DateTime), content(text)
+
+Follower Model --> id(BigAuto), Owner(FK), created_at(DateTime), followed(FK)
+
+Profile --> Id(BigAuto), Owner(OnetoOne), name(char), content(text), image(image), created_at(DateTime), updated_at(DateTime)
+
+
+## TESTING:
 
 I extensively tested manually to ensure that the API was working as intended for my projects purpose. For example...
 
 * Manually verified each url path created to confirm they work and open without error.
+* From my api, when searching for a post/profile that exist (using our posts/id or profile/id), the data is retrieved. 
+*  When attempting to search for a post/profile that does not... "detail: not found." and we get a 404 not found.
 * Verified that the CRUD functionality is available in each app: User, Post, Profile, Comments, Followers, Likes, Bookmarks.
 * Creating a new item and checking new item URL path.
 * Checked that editing a post works.
 * Deleting the item works.
 * Ensured search feature returns results.
+* When logging into my superuser  administrator in my back-end deployed verison of the api: I can confirm all data entered from the front end is displaying!
+
+
+
+## PEP8 testing:
+
+This site was tested and is Pep8 compliant using [Black](https://black.vercel.app/?version=stable&state=_Td6WFoAAATm1rRGAgAhARYAAAB0L-Wj4ARsAnNdAD2IimZxl1N_WlkPinBFoXIfdFTaTVkGVeHShArYj9yPlDvwBA7LhGo8BvRQqDilPtgsfdKl-ha7EFp0Ma6lY_06IceKiVsJ3BpoICJM9wU1VJLD7l3qd5xTmo78LqThf9uibGWcWCD16LBOn0JK8rhhx_Gf2ClySDJtvm7zQJ1Z-Ipmv9D7I_zhjztfi2UTVsJp7917XToHBm2EoNZqyE8homtGskFIiif5EZthHQvvOj8S2gJx8_t_UpWp1ScpIsD_Xq83LX-B956I_EBIeNoGwZZPFC5zAIoMeiaC1jU-sdOHVucLJM_x-jkzMvK8Utdfvp9MMvKyTfb_BZoe0-FAc2ZVlXEpwYgJVAGdCXv3lQT4bpTXyBwDrDVrUeJDivSSwOvT8tlnuMrXoD1Sk2NZB5SHyNmZsfyAEqLALbUnhkX8hbt5U2yNQRDf1LQhuUIOii6k6H9wnDNRnBiQHUfzKfW1CLiThnuVFjlCxQhJ60u67n3EK38XxHkQdOocJXpBNO51E4-f9z2hj0EDTu_ScuqOiC9cI8qJ4grSZIOnnQLv9WPvmCzx5zib3JacesIxMVvZNQiljq_gL7udm1yeXQjENOrBWbfBEkv1P4izWeAysoJgZUhtZFwKFdoCGt2TXe3xQ-wVZFS5KoMPhGFDZGPKzpK15caQOnWobOHLKaL8eFA-qI44qZrMQ7sSLn04bYeenNR2Vxz7hvK0lJhkgKrpVfUnZrtF-e-ubeeUCThWus4jZbKlFBe2Kroz90Elij_UZBMFCcFo0CfIx5mGlrINrTJLhERszRMMDd39XsBDzpZIYV4TcG7HoMS_IF8aMAAAxI-5uTWXbUQAAY8F7QgAAP01Vc6xxGf7AgAAAAAEWVo=)
+
+I set line legth to 79 and Python version to 3.10.
+
+ALL PASSED!
 
 
 ## TECHNOLOGIES USED:
@@ -71,6 +102,19 @@ PYTHON
 * PostgreSQL
 
 * * *
+
+
+## BUGS, ISSUES & FIXES:
+
+* * *
+
+* Initially intalled django 4.1
+pip3 install 'django<4'
+
+Django 3.2 is the LTS (Long Term Support) version of Django and is therefore preferable to use over the newest Django 4
+
+
+
 
 ## DEPLOYMENT:
 
@@ -265,124 +309,12 @@ pip3 freeze --local > requirements.txt
 * I made some moditications to the ERD. I added a Bookmakrs model, which will allow me to display favourite posts. I used the Likes Model as inspiration.
 
 * * *
+### MEDIA:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-DEBUGS
-Initially intalled django 4.1
-pip3 install 'django<4'
-
-Django 3.2 is the LTS (Long Term Support) version of Django and is therefore preferable to use over the newest Django 4
-
-
-
-Credits:
+* * *
 
 - Image for profiles: default image is the same as drf walkthrough project
-- Used drf-api walkthrough project as guidance.. many snippets of code.
-
-## THE CODE:
+- Image for default post: same as walkthrough project.
 
 * * *
-Prior to commencing to write my code out, I planned out the ERD.
 
-<img src="./static/images/diagram.png" width="1000px">
-
-You can find a link to a more in depth database Backend ReadMe HERE.
-
-The User Model ---> Django default User Model. We will use user (PK), Email and Password.
-
-Recipe Model --> Is our main model. It contains all the required fields for our recipe: recipe_id(PK), title, category(FK), slug, author(FK-User), created_on, image, ingredients, directions, likes, favourites, status and user. 
-
-
-Categories Model --> Containing the categories_id(PK), category field.
-
-Comments Model --> Containing, comment_id(PK), User(FK), recipe_id, body, created_on.
-
-Favourites Model --> Contains favourtites_id, recipe_id, user, likes.
-
-
-IMPORTANT RELATIONSHIPS BETWEEN TABLES:
-* One to many relationship between the User and the Recipe model.
-* One to many relationship between the User and the Favouries model.
-* One to many relationship between the User and the Comments model.
-* One to many relartionships between Category and Recipe's.
-* One to many relationships between Recipe and Comments model.
-
-
-* * * ## THE CODE:
-
-* * *
-Prior to commencing to write my code out, I planned out the ERD.
-
-<img src="./static/images/diagram.png" width="1000px">
-
-You can find a link to a more in depth database Backend ReadMe HERE.
-
-The User Model ---> Django default User Model. We will use user (PK), Email and Password.
-
-Recipe Model --> Is our main model. It contains all the required fields for our recipe: recipe_id(PK), title, category(FK), slug, author(FK-User), created_on, image, ingredients, directions, likes, favourites, status and user. 
-
-
-Categories Model --> Containing the categories_id(PK), category field.
-
-Comments Model --> Containing, comment_id(PK), User(FK), recipe_id, body, created_on.
-
-Favourites Model --> Contains favourtites_id, recipe_id, user, likes.
-
-
-IMPORTANT RELATIONSHIPS BETWEEN TABLES:
-* One to many relationship between the User and the Recipe model.
-* One to many relationship between the User and the Favouries model.
-* One to many relationship between the User and the Comments model.
-* One to many relartionships between Category and Recipe's.
-* One to many relationships between Recipe and Comments model.
-
-
-* * * 

@@ -8,6 +8,7 @@ class BookmarkList(generics.ListCreateAPIView):
     """
     List likes or create a like if logged in.
     """
+
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = BookmarkSerializer
     queryset = Bookmark.objects.all()
@@ -20,6 +21,7 @@ class BookmarkDetail(generics.RetrieveDestroyAPIView):
     """
     Retrieve a like or delete it by id if you own it.
     """
+
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = BookmarkSerializer
     queryset = Bookmark.objects.all()

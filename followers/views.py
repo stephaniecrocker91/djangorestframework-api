@@ -8,6 +8,7 @@ class FollowerList(generics.ListCreateAPIView):
     """
     List likes or create a like if logged in.
     """
+
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Follower.objects.all()
     serializer_class = FollowerSerializer
@@ -20,6 +21,7 @@ class FollowerDetail(generics.RetrieveDestroyAPIView):
     """
     Retrieve a like or delete it by id if you own it.
     """
+
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Follower.objects.all()
     serializer_class = FollowerSerializer
